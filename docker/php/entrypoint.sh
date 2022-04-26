@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chmod o+w ./storage/ -R
+chmod -R 777 storage
 php artisan migrate
 
 exec "$@"
