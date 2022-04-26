@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class PointController extends Controller
 {
@@ -37,10 +36,7 @@ class PointController extends Controller
         //     $point->pointable()->save($this->createPointable($latitude, $longitute));
         // }
 
-        return Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-            'latlng' => '49.126464,33.431644',
-            'key' => 'AIzaSyDFCFhb1JgbGK5dbwdAcJbYE4rpnbDDRDI',
-            'language' => 'en'
-        ]);
+        $api = new \App\Services\GeocodeApi(env('GEOCODE_TOKEN'), env('GEOCODE_LANG'));
+        return $api->getAddresses($latitude, $longitude);
     }
 }
