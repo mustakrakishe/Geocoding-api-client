@@ -13,4 +13,9 @@ class StreetAddress extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
 }

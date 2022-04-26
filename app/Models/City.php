@@ -13,4 +13,9 @@ class City extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
 }
