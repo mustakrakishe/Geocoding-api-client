@@ -25,19 +25,21 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-        [$latitude, $longitute] = explode(', ', $request->input('latlng'));
-        $point = Point::firstOrNew([
-                'latitude' => $latitude,
-                'longitude' => $longitute,
-        ]);
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+        
+        // $point = Point::firstOrNew([
+        //         'latitude' => $latitude,
+        //         'longitude' => $longitute,
+        // ]);
 
-        if (!$point->pointable) {
-            $point->pointable()->save($this->createPointable($latitude, $longitute))
-        }
+        // if (!$point->pointable) {
+        //     $point->pointable()->save($this->createPointable($latitude, $longitute));
+        // }
 
         return json_encode([
-            'latitude' => $request->input('lat'),
-            'longitude' => $request->input('lng'),
+            'latitude' => $latitude,
+            'longitude' => $longitude,
         ]);
     }
 

@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/addresses', [PointController::class, 'show'])->only(['store', 'index']);
+Route::resource('/addresses', PointController::class)->only(['store', 'index']);
