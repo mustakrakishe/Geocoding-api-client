@@ -35,7 +35,9 @@ class PointController extends Controller
 
         if (!$point->pointable) {
             $api = new \App\Services\GeocodeApi(env('GEOCODE_TOKEN'), env('GEOCODE_LANG'));
-            return $api->getAddresses($latitude, $longitude);
+            $addresses = $api->getAddresses($latitude, $longitude);
+
+            return $addresses;
 
             // $point->pointable()->save($this->createPointable($latitude, $longitute));
         }
