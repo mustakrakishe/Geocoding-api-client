@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Geocode;
 use App\Models\Point;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,7 @@ class PointController extends Controller
         ]);
 
         if (!$point->pointable) {
-            $api = new \App\Services\GeocodeApi(env('GEOCODE_TOKEN'), env('GEOCODE_LANG'));
-            $addresses = $api->getAddresses($latitude, $longitude);
-
-            return $addresses;
+            return $response = Geocode::getAddresses($latitude, $longitude);
 
             // $point->pointable()->save($this->createPointable($latitude, $longitute));
         }

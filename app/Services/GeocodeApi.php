@@ -16,12 +16,16 @@ class GeocodeApi
         $this->LANG = $lang;
     }
 
+    /**
+     * @return \Illuminate\Http\Client\Response
+     * @throws \Illuminate\Http\Client\RequestException
+     */
     public function getAddresses(float $latitude, float $longitude)
     {
         return Http::get($this->URL, [
             'key' => $this->TOKEN,
             'language' => $this->LANG,
             'latlng' => $latitude . ',' . $longitude,
-        ]);
+        ])->throw();
     }
 }
