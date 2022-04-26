@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Point;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -27,16 +28,16 @@ class PointController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
 
-        // $point = Point::firstOrNew([
-        //         'latitude' => $latitude,
-        //         'longitude' => $longitute,
-        // ]);
+        $point = Point::firstOrNew([
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+        ]);
 
-        // if (!$point->pointable) {
-        //     $point->pointable()->save($this->createPointable($latitude, $longitute));
-        // }
+        if (!$point->pointable) {
+            $api = new \App\Services\GeocodeApi(env('GEOCODE_TOKEN'), env('GEOCODE_LANG'));
+            return $api->getAddresses($latitude, $longitude);
 
-        $api = new \App\Services\GeocodeApi(env('GEOCODE_TOKEN'), env('GEOCODE_LANG'));
-        return $api->getAddresses($latitude, $longitude);
+            // $point->pointable()->save($this->createPointable($latitude, $longitute));
+        }
     }
 }
