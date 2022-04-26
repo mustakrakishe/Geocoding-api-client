@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Point;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PointController extends Controller
 {
@@ -27,7 +27,7 @@ class PointController extends Controller
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
-        
+
         // $point = Point::firstOrNew([
         //         'latitude' => $latitude,
         //         'longitude' => $longitute,
@@ -37,17 +37,10 @@ class PointController extends Controller
         //     $point->pointable()->save($this->createPointable($latitude, $longitute));
         // }
 
-        return json_encode([
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+        return Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'latlng' => '49.126464,33.431644',
+            'key' => 'AIzaSyDFCFhb1JgbGK5dbwdAcJbYE4rpnbDDRDI',
+            'language' => 'en'
         ]);
-    }
-
-    /**
-     * @return App\Models\StreetAddress|App\Models\City|App\Models\Region
-     */
-    private function createPointable(float $latitude, float $longitute)
-    {
-        // 
     }
 }
