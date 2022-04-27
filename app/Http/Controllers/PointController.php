@@ -26,18 +26,19 @@ class PointController extends Controller
      */
     public function store(PointStoreRequest $request)
     {
-        $latitude = $request->input('latitude');
-        $longitude = $request->input('longitude');
-
         $point = Point::firstOrNew([
-                'latitude' => $latitude,
-                'longitude' => $longitude,
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
         ]);
 
-        if (!$point->pointable) {
-            return $response = Geocode::getAddresses($latitude, $longitude);
+        if (!$point->address) {
+            $geocodeAddresses = Geocode::getAddresses($point->latitude, $point->longitude);
 
-            // $point->pointable()->save($this->createPointable($latitude, $longitute));
+            $address = \App\Services\GeocodeAddressMaker::make($geocodeAddresses);
+
+            $point = $address->points()->create($point->toArray())->load('address');
         }
+
+        return $point;
     }
 }

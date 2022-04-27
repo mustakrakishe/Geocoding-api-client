@@ -26,6 +26,6 @@ class GeocodeApi
             'key' => $this->TOKEN,
             'language' => $this->LANG,
             'latlng' => $latitude . ',' . $longitude,
-        ])->throw();
+        ])->throw()['results'];
     }
 }
