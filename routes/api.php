@@ -21,10 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/addresses', PointController::class)->only(['store', 'index']);
+Route::resource('/points', PointController::class)->only(['store', 'index']);
 
 Route::get('/regions/', [RegionController::class, 'index']);
-Route::get('/regions/{region}/addresses', [PointController::class, 'getByRegion']);
+Route::get('/regions/{region}/points', [PointController::class, 'getByRegion']);
 
 Route::get('/cities/', [CityController::class, 'index']);
-Route::get('/cities/{city}/addresses', [PointController::class, 'getByCity']);
+Route::get('/cities/{city}/points', [PointController::class, 'getByCity']);
