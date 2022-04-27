@@ -1,64 +1,263 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Geocoding API Client
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Google Geocoding API Client
 
-## About Laravel
+## Description
+An app allows to get a full address of the point by it's geocoordinates from the Google [Geocoding API](https://developers.google.com/maps/documentation/geocoding). All required points are stored in the local database. It is possible to retreview al stored regions, cities and points. Also, you can get stored points by region or city id.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Available requests
+|Method     |Url                            |Action                                 |
+|-----------|-------------------------------|---------------------------------------|
+|POST       |/points                        |Store point                            |
+|GET        |/points                        |Retreview all stored points            |
+|GET        |/regions/{region_id}/points    |Retreview stored points by region id   |
+|GET        |/cities/{city_id}/points       |Retreview stored points by city id     |
+|GET        |/regions                       |Retreview all stored regions           |
+|GET        |/cities                        |Retreview all stored cities            |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Dependencies
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The project is buid using [Laravel 9](https://laravel.com) PHP Framework, [PHP 8.1](https://php.net) and staffed with a [Docker](https://docker.com) environment configuration files.
 
-## Learning Laravel
+## Usage
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Install & Run
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone this repository. To do so open CLI in your project directory and run:
 
-## Laravel Sponsors
+```
+git clone https://github.com/mustakrakishe/geocoding-api-client .
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2. Duplicate the _.env.example_ file and rename it to _.env_.
 
-### Premium Partners
+3. Set your [Geocoding Api Key](https://developers.google.com/maps/documentation/geocoding/get-api-key) to `GEOCODE_TOKEN` variable in the .env file:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```env
+GEOCODE_TOKEN=your_geocode_api_key
+```
 
-## Contributing
+4. Open CLI in a project dir and up the Docker environment.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+docker-compose up -d
+```
 
-## Code of Conduct
+It will create and run 4 containers:
+- composer;
+- mysql;
+- php;
+- nginx.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+After processing composer container should stop. Further project will work with 3 containers only.
 
-## Security Vulnerabilities
+### Stop
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run in the CLI from the project dir.
 
-## License
+```
+docker-compose stop
+```
+### Run
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Run in the CLI from the project dir.
+
+```
+docker-compose start
+```
+### Uninstall
+
+Run in the CLI from the project dir. It will remove project containers, related volumes and builded images.
+
+```
+docker-compose down -v --rmi local
+```
+
+## Request examples
+
+### 1. Store point
+
+- Request:
+
+[POST] `http://localhost/api/points`
+
+```json
+{
+	"latitude": 49.974198,
+	"longitude": 36.227454
+}
+```
+
+- Response:
+
+```json
+{
+	"data": {
+		"latitude": 49.974198,
+		"longitude": 36.227454,
+		"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+		"city": "Kharkiv",
+		"region": "Kharkiv Oblast"
+	},
+	"status": "OK"
+}
+```
+
+### 2. Retreview all stored points 
+
+- Request:
+
+[GET] `http://localhost/api/points`
+
+- Response:
+
+```json
+{
+	"data": [
+		{
+			"latitude": 49.974198,
+			"longitude": 36.227454,
+			"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+			"city": "Kharkiv",
+			"region": "Kharkiv Oblast"
+		},
+		{
+			"latitude": 49.966901,
+			"longitude": 24.611972,
+			"full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
+			"city": "Busk",
+			"region": "Lviv Oblast"
+		}
+        ...
+	],
+	"status": "OK"
+}
+```
+
+### 3. Retreview stored points by region id
+
+- Request:
+
+[GET] `http://localhost/api/regions/2/points`
+
+- Response:
+
+```json
+{
+	"data": [
+		{
+			"latitude": 49.826467,
+			"longitude": 24.016354,
+			"full_address": "Vulytsya Komaryntsya, 2, L'viv, L'vivs'ka oblast, Ukraine, 79000",
+			"city": "Lviv",
+			"region": "Lviv Oblast"
+		},
+		{
+			"latitude": 49.966901,
+			"longitude": 24.611972,
+			"full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
+			"city": "Busk",
+			"region": "Lviv Oblast"
+		}
+	],
+	"status": "OK"
+}
+```
+
+### 4. Retreview stored points by city id
+
+- Request:
+
+[GET] `http://localhost/api/cities/1/points`
+
+- Response:
+
+```json
+{
+	"data": [
+		{
+			"latitude": 49.974198,
+			"longitude": 36.227454,
+			"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+			"city": "Kharkiv",
+			"region": "Kharkiv Oblast"
+		},
+		{
+			"latitude": 49.940968,
+			"longitude": 36.391452,
+			"full_address": "Biblyka St, 57, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+			"city": "Kharkiv",
+			"region": "Kharkiv Oblast"
+		}
+	],
+	"status": "OK"
+}
+```
+
+### 5. Retreview all stored regions
+
+- Request:
+
+[GET] `http://localhost/api/regions`
+
+- Response:
+
+```json
+{
+	"data": [
+		{
+			"id": 1,
+			"name": "Kharkiv Oblast",
+			"cities": [
+				"Kharkiv",
+				"Tetyushchyne"
+			]
+		},
+		{
+			"id": 2,
+			"name": "Lviv Oblast",
+			"cities": [
+				"Lviv",
+				"Busk"
+			]
+		}
+	],
+	"status": "OK"
+}
+```
+
+### 6. Retreview all stored cities
+
+- Request:
+
+[GET] `http://localhost/api/cities`
+
+- Response:
+
+```json
+{
+	"data": [
+		{
+			"id": 1,
+			"name": "Kharkiv",
+			"region": "Kharkiv Oblast"
+		},
+		{
+			"id": 2,
+			"name": "Tetyushchyne",
+			"region": "Kharkiv Oblast"
+		},
+		{
+			"id": 3,
+			"name": "Lviv",
+			"region": "Lviv Oblast"
+		},
+		{
+			"id": 4,
+			"name": "Busk",
+			"region": "Lviv Oblast"
+		}
+	],
+	"status": "OK"
+}
+```
