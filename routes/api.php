@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('/addresses', PointController::class)->only(['store', 'index']);
+
+Route::get('/regions/{region}/addresses', [PointController::class, 'getByRegion']);
+Route::get('/cities/{city}/addresses', [PointController::class, 'getByCity']);

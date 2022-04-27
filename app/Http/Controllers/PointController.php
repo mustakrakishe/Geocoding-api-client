@@ -43,4 +43,14 @@ class PointController extends Controller
 
         return (new PointResource($point->load('address.city.region')))->additional(['status' => 'OK']);
     }
+
+    public function getByCity(int $cityId)
+    {
+        return new PointCollection(Point::with('address.city.region')->whereRelation('address.city', 'id', $cityId)->get());
+    }
+
+    public function getByRegion(int $regionId)
+    {
+        return new PointCollection(Point::with('address.city.region')->whereRelation('address.city.region', 'id', $regionId)->get());
+    }
 }
