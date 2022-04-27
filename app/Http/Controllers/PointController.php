@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Point;
-use Illuminate\Http\Request;
+use App\Http\Requests\PointStoreRequest;
 
 class PointController extends Controller
 {
@@ -20,10 +19,10 @@ class PointController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\PointStoreRequest;  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PointStoreRequest $request)
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
