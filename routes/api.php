@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\RegionController;
 use Illuminate\Http\Request;
@@ -24,4 +25,6 @@ Route::resource('/addresses', PointController::class)->only(['store', 'index']);
 
 Route::get('/regions/', [RegionController::class, 'index']);
 Route::get('/regions/{region}/addresses', [PointController::class, 'getByRegion']);
+
+Route::get('/cities/', [CityController::class, 'index']);
 Route::get('/cities/{city}/addresses', [PointController::class, 'getByCity']);
