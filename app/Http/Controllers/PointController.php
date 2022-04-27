@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Facades\Geocode;
 use App\Models\Point;
 use App\Http\Requests\PointStoreRequest;
+use App\Http\Resources\PointCollection;
+use App\Http\Resources\PointResource;
 
 class PointController extends Controller
 {
@@ -15,7 +17,7 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        return new PointCollection(Point::with('address.city.region')->get());
     }
 
     /**
@@ -36,9 +38,9 @@ class PointController extends Controller
 
             $address = \App\Services\GeocodeAddressMaker::make($geocodeAddresses);
 
-            $point = $address->points()->create($point->toArray())->load('address');
+            $point = $address->points()->create($point->toArray());
         }
 
-        return $point;
+        return (new PointResource($point->load('address.city.region')))->additional(['status' => 'OK']);
     }
 }
