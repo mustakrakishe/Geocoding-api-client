@@ -17,6 +17,7 @@ class RegionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'cities' => $this->cities->pluck('name'),
         ];
     }
 }
