@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->float('latitude', 16, 14);
-            $table->string('longitude', 17, 14);
-            $table->string('pointable_type');
-            $table->integer('pointable_id');
+            $table->float('longitude', 17, 14);
+            $table->foreignId('address_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
 

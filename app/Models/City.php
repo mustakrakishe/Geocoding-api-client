@@ -9,13 +9,19 @@ class City extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'place_id',
+        'name',
+        'region_id',
+    ];
+
     public function region()
     {
         return $this->belongsTo(Region::class);
     }
 
-    public function points()
+    public function addresses()
     {
-        return $this->morphMany(Point::class, 'pointable');
+        return $this->hasMany(Address::class);
     }
 }

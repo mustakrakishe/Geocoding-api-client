@@ -5,9 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StreetAddress extends Model
+class Address extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'place_id',
+        'full',
+        'city_id',
+    ];
 
     public function city()
     {
@@ -16,6 +22,6 @@ class StreetAddress extends Model
 
     public function points()
     {
-        return $this->morphMany(Point::class, 'pointable');
+        return $this->hasMany(Point::class);
     }
 }

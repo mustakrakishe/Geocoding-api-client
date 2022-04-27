@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('street_addresses', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('value');
+            $table->string('full');
             $table->string('place_id')->unique();
             $table->foreignId('city_id')
                 ->constrained()

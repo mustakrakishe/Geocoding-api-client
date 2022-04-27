@@ -12,15 +12,11 @@ class Point extends Model
     public $fillable = [
         'latitude',
         'longitude',
-        'pointable_type',
-        'pointable_id',
+        'address_id',
     ];
-    
-    /**
-     * @return StreetAddress|City|Region
-     */
-    public function pointable()
+
+    public function address()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Address::class);
     }
 }
