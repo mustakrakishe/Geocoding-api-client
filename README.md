@@ -3,7 +3,7 @@
 A Google Geocoding API Client
 
 ## Description
-An app allows to get a full address of the point by it's geocoordinates from the Google [Geocoding API](https://developers.google.com/maps/documentation/geocoding). All required points are stored in the local database. It is possible to retreview al stored regions, cities and points. Also, you can get stored points by region or city id.
+An app allows to get a full address of the point by it's geocoordinates from the Google [Geocoding API](https://developers.google.com/maps/documentation/geocoding). All required points are stored in the local database. It is possible to retreview all stored regions, cities and points. Also, you can get stored points by region or city.
 
 ## Available requests
 |Method     |Url                            |Action                                 |
@@ -37,7 +37,7 @@ git clone https://github.com/mustakrakishe/geocoding-api-client .
 GEOCODE_TOKEN=your_geocode_api_key
 ```
 
-4. Open CLI in a project dir and up the Docker environment.
+4. Open CLI in a project dir and up the Docker environment:
 
 ```
 docker-compose up -d
@@ -53,25 +53,27 @@ After processing composer container should stop. Further project will work with 
 
 ### Stop
 
-Run in the CLI from the project dir.
+Run in the CLI from the project dir:
 
 ```
 docker-compose stop
 ```
 ### Run
 
-Run in the CLI from the project dir.
+Run in the CLI from the project dir:
 
 ```
 docker-compose start
 ```
 ### Uninstall
 
-Run in the CLI from the project dir. It will remove project containers, related volumes and builded images.
+Run in the CLI from the project dir:
 
 ```
 docker-compose down -v --rmi local
 ```
+
+ It will remove project containers, related volumes and builded images.
 
 ## Request examples
 
@@ -83,8 +85,8 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"latitude": 49.974198,
-	"longitude": 36.227454
+    "latitude": 49.974198,
+    "longitude": 36.227454
 }
 ```
 
@@ -92,14 +94,14 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"data": {
-		"latitude": 49.974198,
-		"longitude": 36.227454,
-		"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
-		"city": "Kharkiv",
-		"region": "Kharkiv Oblast"
-	},
-	"status": "OK"
+    "data": {
+        "latitude": 49.974198,
+        "longitude": 36.227454,
+        "full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+        "city": "Kharkiv",
+        "region": "Kharkiv Oblast"
+    },
+    "status": "OK"
 }
 ```
 
@@ -111,26 +113,26 @@ docker-compose down -v --rmi local
 
 - Response:
 
-```json
+```jsonc
 {
-	"data": [
-		{
-			"latitude": 49.974198,
-			"longitude": 36.227454,
-			"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
-			"city": "Kharkiv",
-			"region": "Kharkiv Oblast"
-		},
-		{
-			"latitude": 49.966901,
-			"longitude": 24.611972,
-			"full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
-			"city": "Busk",
-			"region": "Lviv Oblast"
-		}
+    "data": [
+        {
+            "latitude": 49.974198,
+            "longitude": 36.227454,
+            "full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+            "city": "Kharkiv",
+            "region": "Kharkiv Oblast"
+        },
+        {
+            "latitude": 49.966901,
+            "longitude": 24.611972,
+            "full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
+            "city": "Busk",
+            "region": "Lviv Oblast"
+        }
         ...
-	],
-	"status": "OK"
+    ],
+    "status": "OK"
 }
 ```
 
@@ -144,23 +146,23 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"data": [
-		{
-			"latitude": 49.826467,
-			"longitude": 24.016354,
-			"full_address": "Vulytsya Komaryntsya, 2, L'viv, L'vivs'ka oblast, Ukraine, 79000",
-			"city": "Lviv",
-			"region": "Lviv Oblast"
-		},
-		{
-			"latitude": 49.966901,
-			"longitude": 24.611972,
-			"full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
-			"city": "Busk",
-			"region": "Lviv Oblast"
-		}
-	],
-	"status": "OK"
+    "data": [
+        {
+            "latitude": 49.826467,
+            "longitude": 24.016354,
+            "full_address": "Vulytsya Komaryntsya, 2, L'viv, L'vivs'ka oblast, Ukraine, 79000",
+            "city": "Lviv",
+            "region": "Lviv Oblast"
+        },
+        {
+            "latitude": 49.966901,
+            "longitude": 24.611972,
+            "full_address": "Parkova St, 13м, Bus'k, L'vivs'ka oblast, Ukraine, 80500",
+            "city": "Busk",
+            "region": "Lviv Oblast"
+        }
+    ],
+    "status": "OK"
 }
 ```
 
@@ -174,23 +176,23 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"data": [
-		{
-			"latitude": 49.974198,
-			"longitude": 36.227454,
-			"full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
-			"city": "Kharkiv",
-			"region": "Kharkiv Oblast"
-		},
-		{
-			"latitude": 49.940968,
-			"longitude": 36.391452,
-			"full_address": "Biblyka St, 57, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
-			"city": "Kharkiv",
-			"region": "Kharkiv Oblast"
-		}
-	],
-	"status": "OK"
+    "data": [
+        {
+            "latitude": 49.974198,
+            "longitude": 36.227454,
+            "full_address": "Kyivska St, 4, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+            "city": "Kharkiv",
+            "region": "Kharkiv Oblast"
+        },
+        {
+            "latitude": 49.940968,
+            "longitude": 36.391452,
+            "full_address": "Biblyka St, 57, Kharkiv, Kharkivs'ka oblast, Ukraine, 61000",
+            "city": "Kharkiv",
+            "region": "Kharkiv Oblast"
+        }
+    ],
+    "status": "OK"
 }
 ```
 
@@ -204,25 +206,25 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"data": [
-		{
-			"id": 1,
-			"name": "Kharkiv Oblast",
-			"cities": [
-				"Kharkiv",
-				"Tetyushchyne"
-			]
-		},
-		{
-			"id": 2,
-			"name": "Lviv Oblast",
-			"cities": [
-				"Lviv",
-				"Busk"
-			]
-		}
-	],
-	"status": "OK"
+    "data": [
+        {
+            "id": 1,
+            "name": "Kharkiv Oblast",
+            "cities": [
+                "Kharkiv",
+                "Tetyushchyne"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Lviv Oblast",
+            "cities": [
+                "Lviv",
+                "Busk"
+            ]
+        }
+    ],
+    "status": "OK"
 }
 ```
 
@@ -236,28 +238,28 @@ docker-compose down -v --rmi local
 
 ```json
 {
-	"data": [
-		{
-			"id": 1,
-			"name": "Kharkiv",
-			"region": "Kharkiv Oblast"
-		},
-		{
-			"id": 2,
-			"name": "Tetyushchyne",
-			"region": "Kharkiv Oblast"
-		},
-		{
-			"id": 3,
-			"name": "Lviv",
-			"region": "Lviv Oblast"
-		},
-		{
-			"id": 4,
-			"name": "Busk",
-			"region": "Lviv Oblast"
-		}
-	],
-	"status": "OK"
+    "data": [
+        {
+            "id": 1,
+            "name": "Kharkiv",
+            "region": "Kharkiv Oblast"
+        },
+        {
+            "id": 2,
+            "name": "Tetyushchyne",
+            "region": "Kharkiv Oblast"
+        },
+        {
+            "id": 3,
+            "name": "Lviv",
+            "region": "Lviv Oblast"
+        },
+        {
+            "id": 4,
+            "name": "Busk",
+            "region": "Lviv Oblast"
+        }
+    ],
+    "status": "OK"
 }
 ```
